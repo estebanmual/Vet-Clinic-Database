@@ -5,6 +5,7 @@ CREATE TABLE animals (
     name TEXT NOT NULL,
     date_of_birth DATETIME,
     escape_attempts INTEGER,
-    neutered: TEXT,
+    neutered TEXT,
     weight_kg DECIMAL,
+    species TEXT,
 );
