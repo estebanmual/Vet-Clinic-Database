@@ -70,3 +70,17 @@ SELECT species, AVG(escape_attempts)
 FROM animals
 WHERE date_of_birth BETWEEN '1990%' AND '2000%'
 GROUP BY species
+
+-- What animals belong to Melody Pond?
+SELECT a.name
+FROM animals a
+INNER JOIN owners o
+	ON a.owner_id = o.owner_id
+WHERE o.full_name = 'Melody Pond';
+
+-- List of all animals that are pokemon (their type is Pokemon).
+SELECT a.name
+FROM animals a
+INNER JOIN species s
+	ON s.specie_id = a.specie_id
+WHERE s.name = 'Pokemon';
