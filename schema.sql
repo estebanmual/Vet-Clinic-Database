@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS animals;
 -- Create owners table
 CREATE TABLE owners
 (
-	owner_id INTEGER PRIMARY KEY,
+	owner_id SERIAL PRIMARY KEY,
 	full_name TEXT NOT NULL,
 	age INTEGER
 );
@@ -14,16 +14,16 @@ CREATE TABLE owners
 -- Create species table
 CREATE TABLE species
 (
-    specie_id INTEGER PRIMARY KEY,
+    specie_id SERIAL PRIMARY KEY,
     name TEXT
 );
 
 -- Create animal table
 CREATE TABLE animals
 (
-    animal_id INTEGER PRIMARY KEY,
+    animal_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
-    date_of_birth DATETIME,
+    date_of_birth DATE,
     escape_attempts INTEGER,
     neutered TEXT,
     weight_kg DECIMAL,

@@ -13,7 +13,7 @@ VALUES
     ('Angemon', '2005-06-12', -45, 'true', 1, 2, 5),
     ('Boarmon', '2005-06-7', 20.4, 'true', 7, 2, 5),
     ('Blossom', '1998-10-13', 17, 'true', 3, 1, 4),
-    ('Ditto', '2022-05-14', 22, 'true', 4, 1)
+    ('Ditto', '2022-05-14', 22, 'true', 4, 1, NULL)
 
 INSERT INTO owners
     (full_name, age)
