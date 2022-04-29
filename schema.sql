@@ -1,15 +1,15 @@
 -- These scripts will delete the tables if it's already there
-DROP TABLE IF EXISTS owners;
-DROP TABLE IF EXISTS species;
-DROP TABLE IF EXISTS animals;
-DROP TABLE IF EXISTS specialization;
-DROP TABLE IF EXISTS vets;
-DROP TABLE IF EXISTS visits;
+DROP TABLE IF EXISTS owners CASCADE;
+DROP TABLE IF EXISTS species CASCADE;
+DROP TABLE IF EXISTS animals CASCADE;
+DROP TABLE IF EXISTS specialization CASCADE;
+DROP TABLE IF EXISTS vets CASCADE;
+DROP TABLE IF EXISTS visits CASCADE;
 
 -- Create owners table
 CREATE TABLE owners
 (
-	owner_id INTEGER PRIMARY KEY,
+	owner_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	full_name TEXT NOT NULL,
 	age INTEGER
 );
@@ -17,14 +17,14 @@ CREATE TABLE owners
 -- Create species table
 CREATE TABLE species
 (
-    specie_id INTEGER PRIMARY KEY,
+    specie_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     specie_name TEXT
 );
 
 -- Create animal table
 CREATE TABLE animals
 (
-    animal_id INTEGER PRIMARY KEY,
+    animal_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name TEXT NOT NULL,
     date_of_birth DATE,
     escape_attempts INTEGER,
@@ -39,7 +39,7 @@ CREATE TABLE animals
 --Create vets table
 CREATE TABLE vets
 (
-    vet_id INTEGER PRIMARY KEY,
+    vet_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     vet_name TEXT,
     age INTEGER,
     date_of_graduation DATE
@@ -48,7 +48,7 @@ CREATE TABLE vets
 --Create join table between species and vets
 CREATE TABLE specialization
 (
-    specialization_id INTEGER PRIMARY KEY,
+    specialization_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     specie_id INTEGER,
     vet_id INTEGER,
     FOREIGN KEY(specie_id) REFERENCES species(specie_id),
@@ -58,7 +58,7 @@ CREATE TABLE specialization
 --Create join table between animals and vets
 CREATE TABLE visits
 (
-    visit_id INTEGER PRIMARY KEY,
+    visit_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     animal_id INTEGER,
     vet_id INTEGER,
     date_of_visit DATE,

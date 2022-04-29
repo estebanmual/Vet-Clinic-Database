@@ -148,10 +148,10 @@ WHERE vet_name = 'Stephanie Mendez';
 -- List all vets and their specialties, including vets with no specialties.
 SELECT ve.vet_name, sp.specie_name
 FROM vets ve
-INNER JOIN specialization spz
+LEFT JOIN specialization spz
 	ON spz.vet_id = ve.vet_id
-INNER JOIN species sp
-	ON sp.specie_id = spz.specie_id
+LEFT JOIN species sp
+	ON sp.specie_id = spz.specie_id;
 
 -- List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.
 SELECT a.name, vi.date_of_visit
@@ -186,13 +186,13 @@ ORDER BY date_of_visit ASC
 LIMIT 1;
 
 -- Details for most recent visit: animal information, vet information, and date of visit.
-SELECT a.name, a.date_of_birth, a.escape_attempts, a.neutered, a.weight_kg, ve.vet_name, ve.age, vi.date_of_visit
+SELECT a.*, ve.*, vi.date_of_visit
 FROM animals a
 INNER JOIN visits vi
 	ON vi.animal_id = a.animal_id
 INNER JOIN vets ve
 	ON vi.vet_id = ve.vet_id
-ORDER BY date_of_visit DESC;
+ORDER BY date_of_visit DESC
 LIMIT 1;
 
 -- How many visits were with a vet that did not specialize in that animal's species?
@@ -202,7 +202,9 @@ INNER JOIN visits vi
 	ON vi.animal_id = a.animal_id
 INNER JOIN vets ve
 	ON vi.vet_id = ve.vet_id
-WHERE vet_name = 'Maisy Smith';
+LEFT JOIN specialization spz
+	ON spz.vet_id = ve.vet_id
+WHERE specialization_id IS NULL;
 
 -- What specialty should Maisy Smith consider getting? Look for the species she gets the most.
 SELECT specie_name
@@ -215,5 +217,5 @@ INNER JOIN species spe
 	ON a.specie_id = spe.specie_id
 WHERE vet_name = 'Maisy Smith'
 GROUP BY spe.specie_name
-ORDER BY most_visits DESC
+ORDER BY COUNT(*) DESC
 LIMIT 1;
